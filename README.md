@@ -64,6 +64,9 @@ For easy testing only view the Dapp in an incognito window, or a browser that do
 
 
 
+### Contract Abi
+After compiling the contracts, the contract Abi should be in the eth-contracts/build/contracts folder
+
 # Authors
 Eduard Andrasi
 
