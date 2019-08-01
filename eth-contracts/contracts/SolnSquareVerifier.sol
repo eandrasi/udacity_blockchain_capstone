@@ -25,7 +25,8 @@ contract SolnSquareVerifier is EACustomERC721Token {
     Solution[] solutions;
 
     // TODO define a mapping to store unique solutions submitted
-    mapping(address => Solution) private solutions;
+    mapping(bytes32 => address) uniqueSolutions;
+
 
     // TODO Create an event to emit when a solution is added
     event SolutionAdded(address solutioner);
@@ -42,23 +43,43 @@ contract SolnSquareVerifier is EACustomERC721Token {
     //  - make sure the solution is unique (has not been used before)
     //  - make sure you handle metadata as well as tokenSuplly
 
-    mapping(bytes32 => address) uniqueSolutions;
+    // function mintNewNFT(address Address, uint256 Id,
+    //         uint[2] memory a,
+    //         uint[2] memory a_p,
+    //         uint[2][2] memory b,
+    //         uint[2] memory b_p,
+    //         uint[2] memory c,
+    //         uint[2] memory c_p,
+    //         uint[2] memory h,
+    //         uint[2] memory k,
+    //         uint[2] memory input
+    //     ) public returns (bool) {
+        
+    //     require(verifierContract.verifyTx(a, a_p,b, b_p, c, c_p, h, k, input), "solution is not valid");
+
+    //     bytes32 solutionHash = keccak256(abi.encodePacked(a, a_p,b, b_p, c, c_p, h, k, input));
+    //     require(uniqueSolutions[solutionHash] == address(0), "The solution was previously used.");
+    //     uniqueSolutions[solutionHash] = Address;
+    //     addSolution(Id, Address);
+    //     return mint(Address, Id, "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/");
+    // }
 
     function mintNewNFT(address Address, uint256 Id,
             uint[2] memory a,
-            uint[2] memory a_p,
+            // uint[2] memory a_p,
             uint[2][2] memory b,
-            uint[2] memory b_p,
+            // uint[2] memory b_p,
             uint[2] memory c,
-            uint[2] memory c_p,
-            uint[2] memory h,
-            uint[2] memory k,
+            // uint[2] memory c_p,
+            // uint[2] memory h,
+            // uint[2] memory k,
             uint[2] memory input
         ) public returns (bool) {
         
-        require(verifierContract.verifyTx(a, a_p,b, b_p, c, c_p, h, k, input), "solution is not valid");
+        // require(verifierContract.verifyTx(a, a_p,b, b_p, c, c_p, h, k, input), "solution is not valid");
+        require(verifierContract.verifyTx(a, b, c, input), "solution is not valid");
 
-        bytes32 solutionHash = keccak256(abi.encodePacked(a, a_p,b, b_p, c, c_p, h, k, input));
+        bytes32 solutionHash = keccak256(abi.encodePacked(a, b, c, input));
         require(uniqueSolutions[solutionHash] == address(0), "The solution was previously used.");
         uniqueSolutions[solutionHash] = Address;
         addSolution(Id, Address);
@@ -66,28 +87,3 @@ contract SolnSquareVerifier is EACustomERC721Token {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
