@@ -66,17 +66,11 @@ contract SolnSquareVerifier is EACustomERC721Token {
 
     function mintNewNFT(address Address, uint256 Id,
             uint[2] memory a,
-            // uint[2] memory a_p,
             uint[2][2] memory b,
-            // uint[2] memory b_p,
             uint[2] memory c,
-            // uint[2] memory c_p,
-            // uint[2] memory h,
-            // uint[2] memory k,
             uint[2] memory input
         ) public returns (bool) {
-        
-        // require(verifierContract.verifyTx(a, a_p,b, b_p, c, c_p, h, k, input), "solution is not valid");
+
         require(verifierContract.verifyTx(a, b, c, input), "solution is not valid");
 
         bytes32 solutionHash = keccak256(abi.encodePacked(a, b, c, input));
