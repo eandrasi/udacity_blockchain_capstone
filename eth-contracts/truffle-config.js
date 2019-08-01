@@ -1,5 +1,5 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
-const infuraRinkeby = "rinkeby.infura.io/v3/46e1eba4f7c5458fa6a52b79a6e23354";
+const infuraRinkeby = "https://rinkeby.infura.io/v3/46e1eba4f7c5458fa6a52b79a6e23354";
 const mnemonic = "drip fence buddy news assault drip simple bounce strategy scissors arch coconut";
 
 /**
